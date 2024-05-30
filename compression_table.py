@@ -73,7 +73,12 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 # V = 8.2e8; B = 60.e4; T_e = 100.; T_i = 200.; n_e = 5.e19; space_scale = 0.1; A = 1.0; Z = 1.0
 
 # B compression
-V = 0.45*1.3e+07; B = 400.e4; T_e = 300.; T_i = 300.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 19.0
+# normalization
+# V = 0.5*9.1e+06; B = 400.e4; T_e = 300.; T_i = 300.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 19.0
+# foot
+V = 0.5*1.3e+07; B = 40.e4; T_e = 300.; T_i = 300.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 19.0
+# cs
+# V = 0.5*9.1e+06; B = 400.e4; T_e = 30.; T_i = 30.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 9.0
 
 
 # MLPI 2022
@@ -180,16 +185,16 @@ else:
     # cou_log_brag = (25.3-1.15*np.log10(n_e)+2.3*np.log10(T_e))*(T_e>50.0)
     cou_log_brag = (25.3-1.15*np.log10(n_e)+2.3*np.log10(T_e))
 # cou_log_brag = 10.
-print ('Coulomb Log. (Braginskii) = {:.1f}'.format(cou_log_brag))
-print ('')
+# print ('Coulomb Log. (Braginskii) = {:.1f}'.format(cou_log_brag))
+# print ('')
 
 # ### Calculation of Thermal equilibration (formula from NRL p.34)
 Ther_equilib_ie_cou_Brag = 1.0/(1.8e-19*n_e*cou_log_brag*Z**2*(mass_electron*m_i)**(1./2)/(mass_electron*T_i + m_i*T_e)**(3./2))
 Ther_equilib_ei_cou_Brag = 1.0/(1.8e-19*n_i*cou_log_brag*Z**2*(mass_electron*m_i)**(1./2)/(mass_electron*T_i + m_i*T_e)**(3./2))
-print ('Thermal equilibration i-e = {:.2f}'.format(Ther_equilib_ie_cou_Brag*1e+9), '[ns]')
-print ('Thermal equilibration e-i = {:.2f}'.format(Ther_equilib_ei_cou_Brag*1e+9), '[ns]')
+# print ('Thermal equilibration i-e = {:.2f}'.format(Ther_equilib_ie_cou_Brag*1e+9), '[ns]')
+# print ('Thermal equilibration e-i = {:.2f}'.format(Ther_equilib_ei_cou_Brag*1e+9), '[ns]')
 
-print ('')
+# print ('')
 
 ### Sound velocity and Alfven velocity
 c_sound = np.sqrt(5.0*(n_i*T_i*K_Bol*1.16e4+n_e*T_e*K_Bol*1.16e4)/(3.0*rho)) # P_ther*gamma = rho*V_s^2 (1 eV = 1.16e4 K)
@@ -199,7 +204,7 @@ print ('Alfven velocity           = {:.1e}'.format(c_alfven), '[cm/s]')
 c_magnetosonic = np.sqrt(c_sound**2 + c_alfven**2)
 print ('c_magnetosonic velocity   = {:.1e}'.format(c_magnetosonic), '[cm/s]')
 
-print ('')
+# print ('')
 
 ### electron collision time
 f_e = 2.91e-6*Z*(n_e)*cou_log_brag*(T_e)**(-3./2) # [s-1]  Formula from NRL p.28
@@ -208,12 +213,12 @@ tau_e=1.0/f_e # [s]
 vth_e= 4.19e7*(T_e)**(1./2) # [cm/sec] Formula from NRL p.29
 ### electron mean free path
 mfp_e = max(vth_e, V)*tau_e # [cm]
-print ('Electron thermal velocity = {:.2f}'.format(vth_e*1e-5), '[km/s]')
+# print ('Electron thermal velocity = {:.2f}'.format(vth_e*1e-5), '[km/s]')
 print ('Electron mean free path   = {:.2e}'.format(mfp_e),      '[cm]')
 print ('Electron collision time   = {:.2e}'.format(tau_e*1e+9), '[ns]')
 # print ('Electron collisionality   = {:.2e}'.format(mfp_e / space_scale))
 
-print ('')
+# print ('')
 
 ### ion collision time
 f_i = 4.8e-8*Z**4*(A)**(-1./2)*n_i*cou_log_brag*(T_i)**(-3./2) # [s-1]  Formula from NRL p.28
@@ -222,59 +227,60 @@ tau_i= 1.0/f_i # [s]
 vth_i= 9.79e5*(A)**(-1./2)*(T_i)**(1./2) # [cm/s] Formula from NRL p.29
  ### ion mean free path
 mfp_i = max(vth_i, V)*tau_i # [cm]
-print ('Ion thermal velocity      = {:.1e}'.format(vth_i*1e-5), '[km/s]')
+# print ('Ion thermal velocity      = {:.1e}'.format(vth_i*1e-5), '[km/s]')
 print ('Ion mean free path        = {:.1e}'.format(mfp_i),      '[cm]')
 print ('Ion collision time        = {:.2e}'.format(tau_i*1e+9), '[ns]')
 # print ('Ion collisionality        = {:.2e}'.format(mfp_i / space_scale))
 
-print ('')
+# print ('')
 
 ### electron gyroradius and gyrofrequency
 # gyro_e = mass_electron/(e_charge*B) * max(vth_e, V) # [cm]
 gyro_e = mass_electron * c_cgs/(e_charge_cgs*B) * max(vth_e, V) # [cm]
 print ('Electron Larmor radius    = {:.2e}'.format(gyro_e),     '[cm]')
 gyrofreq_e = vth_e/gyro_e/(2.*np.pi) # [s-1]
-print ('Electron gyrofrequency    = {:.2e}'.format(gyrofreq_e), '[s-1]')
+# print ('Electron gyrofrequency    = {:.2e}'.format(gyrofreq_e), '[s-1]')
 print ('Electron Larmor period    = {:.1e}'.format(1./gyrofreq_e),     '[s]')
 #electron magnetization => collision_time/gyrotime
 omega_tau_e = e_charge_cgs*B*tau_e/mass_electron/c_cgs
-print ('Electron magnetization    = {:.2f}'.format(omega_tau_e))
+# print ('Electron magnetization    = {:.2f}'.format(omega_tau_e))
 print ('Hall parameter for eon He = {:.2f}'.format(mfp_e/gyro_e))
    
-print ('') 
+# print ('') 
  
 ### ions gyroradius and gyrofrequency
 gyro_freq_i = (Z*e_charge_cgs*B)/m_i/c_cgs/(2.*np.pi)  # [s^-1]
-print ('gyro_freq_i               = {:.1e}'.format(gyro_freq_i))
-print ('Ion Larmor period         = {:.1e}'.format(1e9/gyro_freq_i),     '[ns]')
 gyro_i = m_i*c_cgs/(Z*e_charge_cgs*B) * max(vth_i, V) # [cm]
+
+# print ('gyro_freq_i               = {:.1e}'.format(gyro_freq_i))
 print ('Ion Larmor radius         = {:.2e}'.format(gyro_i*1e4),     '[um]')
+print ('Ion Larmor period         = {:.1e}'.format(1e9/gyro_freq_i),     '[ns]')
 # gyrofreq_i = vth_i/gyro_i/(2.*np.pi) # [s-1]
 # print ('Ion gyrofrequency         = {:.2e}'.format(gyrofreq_i), '[s-1]')
 # print ('Ion gyro-period           = {:.2e}'.format(1.e9/gyrofreq_i), '[ns]')
 #ion magnetization => collision_time/gyrotime
 omega_tau_i = e_charge_cgs*Z*B*tau_i/m_i/c_cgs
-print ('Ion magnetization         = {:.2f}'.format(omega_tau_i))
+# print ('Ion magnetization         = {:.2f}'.format(omega_tau_i))
 print ('Hall parameter for ion Hi = {:.8f}'.format(mfp_i/gyro_i))
-print ('Ion Larmor radius / L_sys = {:.2e}'.format(gyro_i / space_scale))
+# print ('Ion Larmor radius / L_sys = {:.2e}'.format(gyro_i / space_scale))
 
-print ('')
+# print ('')
 
 ### ion inertial length
 di = 2.28e7 * Z**(-1) * (A/n_i)**(0.5)  #[cm]
-print ('Ion inertial length di    = {:.2e}'.format(di),     '[cm]')
+# print ('Ion inertial length di    = {:.2e}'.format(di),     '[cm]')
 
 ### electron inertial length
 de = 5.31e5 * (1/n_e)**(0.5)  #[cm]
-print ('Electron inertial length de    = {:.2e}'.format(de),     '[cm]')
+# print ('Electron inertial length de    = {:.2e}'.format(de),     '[cm]')
 
 ### Cooling time  
 cool_rate = 1.7*10e-25*(Z**2)*T_e**(1./2) # normalized cooling rate
 cooling_time_thin = 4.0e-36*A*(1+Z)*T_e/(Z*rho*cool_rate)
-print ('Cooling rate              = {:.2e}'.format(cool_rate))
-print ('Cooling time - thin       = {:.2e}'.format(cooling_time_thin*1e+9), '[ns]')
+# print ('Cooling rate              = {:.2e}'.format(cool_rate))
+# print ('Cooling time - thin       = {:.2e}'.format(cooling_time_thin*1e+9), '[ns]')
 
-print ('')
+# print ('')
 
 ### beta thermic and beta dynamic
 P_ther = (n_i*T_i+n_e*T_e)*K_Bol*1.16e4
@@ -289,8 +295,8 @@ P_ther_i = (n_i*T_i)*K_Bol*1.16e4
 P_ther_e = (n_e*T_e)*K_Bol*1.16e4
 beta_ther_i_CGS = P_ther_i/(B**2.0/(8*np.pi))
 beta_ther_e_CGS = P_ther_e/(B**2.0/(8*np.pi))
-print ('Beta thermic of ion       = {:.1e}'.format(beta_ther_i_CGS)) # [P_ther/(B^2/(8*pi))]
-print ('Beta thermic of eon       = {:.1e}'.format(beta_ther_e_CGS)) # [P_ther/(B^2/(8*pi))]
+# print ('Beta thermic of ion       = {:.1e}'.format(beta_ther_i_CGS)) # [P_ther/(B^2/(8*pi))]
+# print ('Beta thermic of eon       = {:.1e}'.format(beta_ther_e_CGS)) # [P_ther/(B^2/(8*pi))]
 
 
 mach_sonore = V/c_sound
@@ -300,7 +306,7 @@ print ('Alfven Mach number        = {:.2e}'.format(mach_alfvenique))
 mach_magnetosonic = V/c_magnetosonic
 print ('Magnetosonic Mach number  = {:.2e}'.format(mach_magnetosonic))    
 
-print ('')
+# print ('')
 
 ### Reunolds, Magnetic Reynolds and Pecklet - crutial parameters for MHD, they all should be >1 (even >>1)
 
@@ -315,22 +321,22 @@ print ('Reynolds number (with B)  = {:.1e}'.format(Re_i_B))
 Mu = 2.0e19 * T_i**(2.5) / cou_log_brag / A**0.5 / Z**4 / n_i
 Re = space_scale * V / Mu
 print ('Reynolds number (w/o  B)  = {:.1e}'.format(Re))
-print ('')
+# print ('')
 
 #sptizer diffusivity
 Spitzer_condu = n_e*e_charge**2.0*tau_e/mass_electron
-print ('Spitzer conductivity = {:.1e}'.format(Spitzer_condu))
+# print ('Spitzer conductivity = {:.1e}'.format(Spitzer_condu))
 Spitzer_resi = 1.0/Spitzer_condu
-print ('Spitzer resistivity = {:.1e}'.format(Spitzer_resi))
+# print ('Spitzer resistivity = {:.1e}'.format(Spitzer_resi))
 mag_diff = Spitzer_resi/(4.*np.pi)
-print ('Magnetic diffusivity      = {:.2e}'.format(mag_diff*1e-4), '[m^2/s]')
+# print ('Magnetic diffusivity      = {:.2e}'.format(mag_diff*1e-4), '[m^2/s]')
 mag_diff_time = space_scale**2/mag_diff
-print ('Magnetic diffusion time   = {:.2e}'.format(mag_diff_time*1e+9), '[ns]')     
+# print ('Magnetic diffusion time   = {:.2e}'.format(mag_diff_time*1e+9), '[ns]')     
 # Magnetic Reynolds ### advection (induction) of B by plasma motion / diffusion of B in the plasma
 Rm = V*space_scale/mag_diff  
 print ('Magnetic Reynolds number  = {:.1e}'.format(Rm))
 
-print ('')
+# print ('')
 # Double Check
 # Dm = 8.2e5 * cou_log_brag * Z / T_e**(1.5)
 # Rm1 = space_scale * V / Dm
@@ -352,7 +358,7 @@ Oe = 2.21e21 * T_e**2.5 / cou_log_brag / (Z+1) / n_e
 Pe = space_scale * V / Oe
 print ('Peclet number (w/o  B)    = {:.1e}'.format(Pe))
 
-print ('')
+# print ('')
 
 
 
@@ -363,13 +369,13 @@ Euler_CGS = (P_dyn/P_ther)**(1./2)
 Alfven_CGS = B/(4*np.pi*P_ther)**(1./2)
 # print 'Alfven number             = {:.2f}'.format(Alfven_CGS) # [B/sqrt(4pi*P)] 
 
-print ('')
+# print ('')
 
 ## optical depth
 g_bar = 1.2
 
 od = 5e-38 * n_e * n_i * Z**2 * g_bar * space_scale * T_e**-3.5
-print ('Bremsstrahlung optical depth = {:.1e}'.format(od))
+# print ('Bremsstrahlung optical depth = {:.1e}'.format(od))
 
 
 
