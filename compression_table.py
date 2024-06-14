@@ -76,9 +76,12 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 # normalization
 # V = 0.5*9.1e+06; B = 400.e4; T_e = 300.; T_i = 300.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 19.0
 # foot
-V = 0.5*1.3e+07; B = 40.e4; T_e = 300.; T_i = 300.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 19.0
+# V = 0.5*1.3e+07; B = 40.e4; T_e = 300.; T_i = 300.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 19.0
 # cs
 # V = 0.5*9.1e+06; B = 400.e4; T_e = 30.; T_i = 30.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 9.0
+
+# CME
+V = 4.6e+08; B = 100; T_e = 1e7/1.16e4; T_i = 1e7/1.16e4; n_e = 1e12; space_scale = 0.1; A = 1.28; Z = 1
 
 
 # MLPI 2022
