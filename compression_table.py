@@ -80,8 +80,17 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 # cs
 # V = 0.5*9.1e+06; B = 400.e4; T_e = 30.; T_i = 30.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 9.0
 
-# CME
-V = 4.6e+08; B = 100; T_e = 1e7/1.16e4; T_i = 1e7/1.16e4; n_e = 1e12; space_scale = 0.1; A = 1.28; Z = 1
+# CME at 10 G
+# V = 4.6e+08; B = 100; T_e = 1e7/1.16e4; T_i = 1e7/1.16e4; n_e = 1e12; space_scale = 0.1; A = 1.28; Z = 1
+# V = 0.8e+08; B = 10; T_e = 2.3e5/1.16e4; T_i = 2.3e5/1.16e4; n_e = 1e10; space_scale = 2e11; A = 1.28; Z = 1
+# CME at 100 G
+# V = 2.5e+08; B = 100; T_e = 2.3e6/1.16e4; T_i = 2.3e6/1.16e4; n_e = 1e11; space_scale = 2e11; A = 1.28; Z = 1
+# CME at 1 G
+V = 0.24e+08; B = 1; T_e = 2.3e4/1.16e4; T_i = 2.3e4/1.16e4; n_e = 1e9; space_scale = 2e11; A = 1.28; Z = 1
+
+# CME in lab with B = 3e5 G
+# V = 0.6e+08; B = 3e5; T_e = 5.0e5/1.16e4; T_i = 5.0e5/1.16e4; n_e = 7.5e18; space_scale = 1.0; A = 17.3; Z = 5.9
+
 
 
 # MLPI 2022
@@ -293,6 +302,8 @@ beta_ther_CGS = P_ther/(B**2.0/(8*np.pi))
 print ('Beta thermic              = {:.1e}'.format(beta_ther_CGS)) # [P_ther/(B^2/(8*pi))]
 beta_dyn_CGS = rho*V**2.0/(B**2.0/(8*np.pi)) 
 print ('Beta dynamic              = {:.1e}'.format(beta_dyn_CGS)) # [P_dyn/(B^2/(8*pi))]
+
+print ('Beta dynamic + thermal    = {:.1e}'.format(beta_dyn_CGS+beta_ther_CGS)) # [P_dyn/(B^2/(8*pi))]
 
 P_ther_i = (n_i*T_i)*K_Bol*1.16e4
 P_ther_e = (n_e*T_e)*K_Bol*1.16e4
