@@ -78,7 +78,16 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 # foot
 # V = 0.5*1.3e+07; B = 40.e4; T_e = 300.; T_i = 300.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 19.0
 # cs
-# V = 0.5*9.1e+06; B = 400.e4; T_e = 30.; T_i = 30.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 9.0
+V = 0.5*9.1e+06; B = 400.e4; T_e = 30.; T_i = 30.; n_e = 1.3e21; space_scale = 0.03; A = 64.0; Z = 9.0
+
+# B table for astro
+# V = 2.5e6; B = 20e-6; T_e = 0.8e3; T_i = 0.8e3; n_e = 7.0; space_scale = 4.6e19; A = 1; Z = 1
+# Scollini in the CS
+# V = 2.5e7; B = 30e-9*1e4; T_e = 1e6/1e4; T_i = 1e6/1e4; n_e = 2.0; space_scale = 1.5e7*1e5; A = 1; Z = 1
+# Scollini in the foot
+# V = 2.5e7; B = 10e-9*1e4; T_e = 2.5e4/1e4; T_i = 2.5e4/1e4; n_e = 2.0; space_scale = 1.5e7*1e5; A = 1; Z = 1
+
+
 
 # CME at 10 G
 # V = 4.6e+08; B = 100; T_e = 1e7/1.16e4; T_i = 1e7/1.16e4; n_e = 1e12; space_scale = 0.1; A = 1.28; Z = 1
@@ -86,7 +95,7 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 # CME at 100 G
 # V = 2.5e+08; B = 100; T_e = 2.3e6/1.16e4; T_i = 2.3e6/1.16e4; n_e = 1e11; space_scale = 2e11; A = 1.28; Z = 1
 # CME at 1 G
-V = 0.24e+08; B = 1; T_e = 2.3e4/1.16e4; T_i = 2.3e4/1.16e4; n_e = 1e9; space_scale = 2e11; A = 1.28; Z = 1
+# V = 0.24e+08; B = 1; T_e = 2.3e4/1.16e4; T_i = 2.3e4/1.16e4; n_e = 1e9; space_scale = 2e11; A = 1.28; Z = 1
 
 # CME in lab with B = 3e5 G
 # V = 0.6e+08; B = 3e5; T_e = 5.0e5/1.16e4; T_i = 5.0e5/1.16e4; n_e = 7.5e18; space_scale = 1.0; A = 17.3; Z = 5.9
@@ -184,7 +193,7 @@ print ('Ion density n_i           = {:.1e}'.format(n_i),         '[cm-3]')
 # print 'Density rho               = {:.1e}'.format(rho),         '[g/cm-3]'
 print ('Charge state Z            = {:.1f}'.format(Z))
 print ('Mass number A             = {:.1f}'.format(A))
-print ('Spacial scale             = {:.1e}'.format(space_scale), '[cm]')
+print ('Spatial scale             = {:.1e}'.format(space_scale), '[cm]')
 
 print ('')
 
@@ -378,7 +387,7 @@ print ('Peclet number (w/o  B)    = {:.1e}'.format(Pe))
 
 ### Euler and Alfven numbers
 Euler_CGS = (P_dyn/P_ther)**(1./2)
-# print 'Euler number              = {:.2f}'.format(Euler_CGS) # [sqrt(P_dyn/P_ther)]
+print ('Euler number              = {:.1e}'.format(Euler_CGS)) # [sqrt(P_dyn/P_ther)]
 
 Alfven_CGS = B/(4*np.pi*P_ther)**(1./2)
 # print 'Alfven number             = {:.2f}'.format(Alfven_CGS) # [B/sqrt(4pi*P)] 
