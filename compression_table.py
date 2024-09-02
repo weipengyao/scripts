@@ -79,6 +79,8 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 # V = 0.5*1.3e+07; B = 40.e4; T_e = 300.; T_i = 300.; n_e = 1.3e21; space_scale = 0.1; A = 64.0; Z = 19.0
 # cs
 V = 5*1e6; B = 450.e4; T_e = 17.; T_i = 17.; n_e = 1.3e21; space_scale = 0.03; A = 64.0; Z = 6.0
+# V = 5*1e6; B = 30.e4; T_e = 17.; T_i = 17.; n_e = 1.3e21; space_scale = 0.03; A = 64.0; Z = 6.0
+
 # updated numbers
 # V = 0.5*6.8e+06; B = 300.e4; T_e = 17.; T_i = 17.; n_e = 1.3e21; space_scale = 0.03; A = 64.0; Z = 9.0
 
