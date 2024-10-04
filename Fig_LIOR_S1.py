@@ -9,6 +9,7 @@ Created on Thu Oct  3 16:33:08 2024
 # Proposal for Apollon 2025 about X-ray and neutron dual source
 # Figure of spectra for protons, electrons, and X-rays
 
+# load plotting parameters
 import matplotlib as mpl
 import happi
 import numpy as np
@@ -36,3 +37,11 @@ plt.rc('xtick', labelsize=12)
 plt.rc('ytick', labelsize=12)
 plt.rc('axes', labelsize=12)
 plt.rc('legend', fontsize=10)
+
+
+# load data
+
+import numpy as np
+np.load('/Users/yao/Desktop/Proton_Spectrum_RCF_MeV_Avg.dat')
+
+
