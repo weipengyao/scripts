@@ -52,7 +52,7 @@ contrast = 2;
 %colorbar;
 
 %Ouverture du scan IP
-data_place='C:\Users\lelievre.r\Documents\Manips\2023-04 APOLLON\Qualification 4PW\TP';
+data_place='/Users/yao/Nextcloud/PROJECTS/Apollon/Shock_Oct2024/24SF02-Data/24sf02-rcf-ip/ipS/';
 dircur=pwd
 cd(data_place);
 [nom,chemin]=uigetfile('*.inf','Fichier Thomson Parabola IP(16 bits)'); % Dialog box that allows user to specify an .inf file
