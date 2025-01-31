@@ -62,6 +62,7 @@ global epaisseur
 % Parameters for different types of RCFs; 
 global ep_PET  %thickness of PET-layer in mm
 ep_PET=0.500;
+ep_PET=0.080;  % there are also some 80 um ones
 global ep_ni
 ep_ni=0.05;    %thickness of Ni-layer in mm
 
@@ -151,7 +152,8 @@ total_EBT3=ep_sens_EBT3+2.*ep_surf_EBT3;
 
 %  Alu=Aluminum, HD1=HD810, HD2=HD_V2, MD1=MD55, EBT2=EBT2, PET= plastic
 %  layer , PLA= 2*PET (double of thickness)- same material;
-save_name='Analyse_RCF_F1_2023';
+% save_name='Analyse_RCF_F1_2023';
+save_name='Analyse_RCF_shock2024';
 etude='Yes';
 while strcmp(etude,'Yes')
     analyse = questdlg('What do you want to do?','Please select one option:','1 Define RCF pack','2 Retrieve Energy in RCF','3 Reconstruct Spectre','1 Define RCF pack');
@@ -177,6 +179,12 @@ while strcmp(etude,'Yes')
            
           %defaultanswer=  {'Alu;Al1;Al1;HD2;Al1;Al1;Al1;Al1;HD2;Al1;Al2;HD2;Al1;Al1;Al1;Al2;HD2;Al3;HD2;Al1;Al3;HD2;Al1;Al1;Al3;EB3;Al1;Al1;Al1;Al3;EB3;Al4;EB3;Al1;Al4;EB3;Al1;Al1;Al4;EB3;Al1;Al1;Al1;Al1;Al4;EB3;Al3;AL3;EB3;Al1;Al3;Al3;EB3;Al1;Al1;Al1;Al3;Al3;EB3;Al1;Al1;Al1;Al3;Al3;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','85'};
           %defaultanswer=  {'Alu;Al1;Al1;HD2;Al1;Al1;Al1;Al1;HD2;Al1;Al2;HD2;Al1;Al1;Al1;Al2;HD2;Al3;HD2;Al1;Al3;HD2;Al1;Al1;Al3;EB3;Fer;EB3;Al1;Al1;Fer;EB3;Al1;Al1;Al1;Al1;Fer;EB3;Al2;Fer;EB3;Al1;Al2;Fer;EB3;Al1;Al1;Al2;Fer;EB3;Al1;Al1;Al1;Al1;Al2;Fer;EB3;Al3;Fer;EB3;Al3;Fer;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','85'};
+        
+          % defaultanswer=  {'Alu;HD2;EB3;PET;EB3;PET;EB3;PET;PET;EB3;PET;PET;PET;EB3;PET;PET;PET;PET;EB3;PET;PET;PET;PET;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','20'};
+          
+        % LULI2000 Jan 2025 -- shock & turbulence
+          defaultanswer=  {'Alu;HD2;EB3;PET;EB3;PET;EB3;PET;PET;EB3;PET;PET;PET;EB3;EB3;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','20'};
+
          
        %APOLLON - DPM 2022   
            % defaultanswer=  {'Alu;EB3;EB3;EB3;AL1;EB3;AL1;EB3;AL1;EB3;AL1;AL1;EB3;AL1;AL1;EB3;AL1;AL1;EB3;AL1;AL1;EB3;AL1;AL1;EB3;AL1;AL1;AL1;EB3;AL1;AL1;AL1;EB3;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;AL1;EB3;',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','45'};
@@ -190,7 +198,7 @@ while strcmp(etude,'Yes')
           % defaultanswer=  {'Alu;Al1;Al1;HD2;Al1;Al1;Al1;Al1;HD2;Al1;Al2;HD2;Al1;Al1;Al1;Al2;HD2;Al3;HD2;Al1;Al3;HD2;FER;EB3;AL4;EB3;PLO;EB3;PLO;EB3;PLO;EB3;PLO;EB3;PLO;EB3;PLO;EB3;PLO;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','90'}; 
           
           % design #4
-          defaultanswer=  {'Alu;Al1;Al1;HD2;Al1;Al1;HD2;Al1;Al1;Al1;Al1;HD2;Al1;Al1;Al1;Al1;HD2;Al2;HD2;Al2;HD2;Al3;EB3;Al4;EB3;Al4;EB3;Al4;EB3;Al4;EB3;Al4;EB3;Al3;EB3;Al3;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','80'};
+          % defaultanswer=  {'Alu;Al1;Al1;HD2;Al1;Al1;HD2;Al1;Al1;Al1;Al1;HD2;Al1;Al1;Al1;Al1;HD2;Al2;HD2;Al2;HD2;Al3;EB3;Al4;EB3;Al4;EB3;Al4;EB3;Al4;EB3;Al4;EB3;Al3;EB3;Al3;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','80'};
           
           %defaultanswer=  {'Alu;Al1;Al1;HD2;Al1;Al1;HD2;Al1;Al1;Al1;Al1;HD2;Al1;Al1;Al1;Al1;HD2',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','25'};
 
@@ -397,7 +405,7 @@ while strcmp(etude,'Yes')
        
         calcul_profil_depo_E
         
-        %save('profile_depo_E.mat','e_inc','in_layer')
+        save('profile_depo_E.mat','e_inc','in_layer')
         
         % Find minimum Energy to which RCF is sensitive to. MD have 2
         % active 
