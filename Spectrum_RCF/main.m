@@ -82,7 +82,7 @@ ep_al_filter4=1.5;
 global ep_fe_filter   %thickness of Fe-layer in mm
 ep_fe_filter=0.025;
 global ep_cu
-ep_cu=2.0;    %thickness of Cu-layer in mm
+ep_cu=0.1;    %thickness of Cu-layer in mm
 global ep_pb
 ep_pb=1.0;    %thickness of Pb-layer in mm
 
@@ -183,9 +183,11 @@ while strcmp(etude,'Yes')
           % defaultanswer=  {'Alu;HD2;EB3;PET;EB3;PET;EB3;PET;PET;EB3;PET;PET;PET;EB3;PET;PET;PET;PET;EB3;PET;PET;PET;PET;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','20'};
           
         % LULI2000 Jan 2025 -- shock & turbulence
-          defaultanswer=  {'Alu;HD2;EB3;PET;EB3;PET;EB3;PET;PET;EB3;PET;PET;PET;EB3;EB3;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','20'};
+          % defaultanswer=  {'Alu;HD2;EB3;PET;EB3;PET;EB3;PET;PET;EB3;PET;PET;PET;EB3;EB3;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','20'};
 
-         
+        % ELI 2025
+          defaultanswer=  {'Alu;HD2;HD2;HD2;HD2;PET;EB3;PET;EB3;PET;EB3;PET;EB3;COP;EB3;COP;EB3;COP;EB3;COP;EB3;COP;EB3;COP;COP;COP;EB3;COP;COP;COP;EB3;COP;COP;COP;EB3',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','35'};
+
        %APOLLON - DPM 2022   
            % defaultanswer=  {'Alu;EB3;EB3;EB3;AL1;EB3;AL1;EB3;AL1;EB3;AL1;AL1;EB3;AL1;AL1;EB3;AL1;AL1;EB3;AL1;AL1;EB3;AL1;AL1;EB3;AL1;AL1;AL1;EB3;AL1;AL1;AL1;EB3;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;AL1;EB3;AL1;AL1;AL1;AL1;AL1;EB3;',num2str(ep_al*1000),num2str(ep_PET*1000),num2str(ep_cu*1000),num2str(ep_ta*1000),'0.1','0.1','45'};
 
