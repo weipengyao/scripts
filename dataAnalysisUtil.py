@@ -32,7 +32,8 @@ def loadup(fileName):
     Loads and returns a given file in YT.
     You must load up an file before you use ANY function that requires a "ds" object. 
     """
-    ds = yt.frontends.flash.FLASHDataset(filename=fileName)
+    ds = yt.frontends.flash.data_structures.FLASHDataset(filename=fileName)
+    #ds = yt.frontends.flash.data_structures.FLASHDataset(filename=fileName)
     print("Loaded up %s" % fileName)
     return ds
 
@@ -217,7 +218,7 @@ def genSliceArray(ds,axis,coords,bounds,field, resLevel=None,sourceS=None,center
     
     Parameters:
         ds: The dataset to use
-        axis: The axis to cut across. If the given axis is not possible, it will raise an error. Can be 0,1,2 for x,y,z. Cylinders can only be cut along 2
+        axis: The axis to cut across. If the given axis is not possible, it will raise an error. Can be 0,1,2s for x,y,z. Cylinders can only be cut along 2
         coordinate: The coordinates where the slice will be made
         bounds: Bounds are the min and max in the image plane that we want our image to cover.  It's in the order of (xmin, xmax, ymin, ymax), where the coordinates are all in the appropriate code units. Can automatically use the maximum by providing strins "XY", "YZ" and "XZ"
         field: The field to use if making an array
@@ -647,18 +648,19 @@ def basic2DPlot(frb,axisLabel=None,name=None,colormap="default",title=None,POutp
         POutput: Whether or not it should print runtime info, on by default as defined by init().
     
     """
+    
     if isinstance(frb,yt.ImageArray):
         if ((POutput == None) and (PLog == True)) or (POutput == True): print("Loading up data as YT FRB")
         show = np.array(frb)
-        plt.figure()
+        plt.figure(figsize=(12,8))
         plt.imshow(show, interpolation=interpolation, extent=extent)
     elif isinstance(frb,np.ndarray): 
         if ((POutput == None) and (PLog == True)) or (POutput == True): print("Loading up data as numpy array")
-        plt.figure()
+        plt.figure(figsize=(12,8))
         plt.imshow(frb, interpolation=interpolation, extent=extent)
     else:
         raise TypeError("Unknown array type, please pass either a numpy array or a YT array")
-
+    
     
     colormapSet(colormap)    
     q = plt.colorbar()
@@ -890,7 +892,7 @@ def plot2DDS(ds, axis, coords, bounds, field, logScale=False,resLevel=None, sour
         elif field == 'magp': title = str(":"+ getUnits(ds,field))
         elif field == 'pres': title = str("Pressure:"+ getUnits(ds,field))
     
-    basic2DPlot(data,axisLabels,name,colormap,title,interpolation,extent=ext,)
+    return (data,axisLabels,name,colormap,title,interpolation,ext)
 
 def plot1DDS(ds,axis,points,field, logScale=False,fieldParameters=None,dataSource=None,POutput=None,format='-b',axisNames=None,name=None,title=None,XKCD=False,axisLimX=None, axisLimY=None):
     print("This may take a moment")
