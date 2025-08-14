@@ -114,7 +114,7 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 
 # LULI2000 - Jan. 2025 - Turbulence
 # V = 0.5e+08; B = 1e5; T_e = 35; T_i = 10; n_e = 1e18; space_scale = 1.0; A = 1; Z = 1
-V = 0.0; B = 1e5; T_e = 35; T_i = 10; n_e = 1e18; space_scale = 1.0; A = 1; Z = 1
+V = 0.0; B = 1e5; T_e = 35; T_i = 10; n_e = 2e17; space_scale = 1.0; A = 1; Z = 1
 
 
 
@@ -338,11 +338,11 @@ beta_ther_e_CGS = P_ther_e/(B**2.0/(8*np.pi))
 # print ('Beta thermic of eon       = {:.1e}'.format(beta_ther_e_CGS)) # [P_ther/(B^2/(8*pi))]
 
 
-mach_sonore = V/c_sound
+mach_sonore = max(vth_i, V)/c_sound
 print ('Mach number               = {:.2e}'.format(mach_sonore))
-mach_alfvenique = V/c_alfven
+mach_alfvenique = max(vth_i, V)/c_alfven
 print ('Alfven Mach number        = {:.2e}'.format(mach_alfvenique))    
-mach_magnetosonic = V/c_magnetosonic
+mach_magnetosonic = max(vth_i, V)/c_magnetosonic
 print ('Magnetosonic Mach number  = {:.2e}'.format(mach_magnetosonic))    
 
 # print ('')
@@ -353,12 +353,12 @@ print ('Magnetosonic Mach number  = {:.2e}'.format(mach_magnetosonic))
 visc_i_B = 2.0e8*T_e/(Z*B)
 visc_i_B = visc_i_B #(cm2/s)
 #Ion Reynolds number with magnetic field
-Re_i_B = space_scale*V/visc_i_B
+Re_i_B = space_scale*max(vth_i, V)/visc_i_B
 print ('Reynolds number (with B)  = {:.1e}'.format(Re_i_B))
 
 # ion kinematic viscosity without B
 Mu = 2.0e19 * T_i**(2.5) / cou_log_brag / A**0.5 / Z**4 / n_i
-Re = space_scale * V / Mu
+Re = space_scale * max(vth_i, V) / Mu
 print ('Reynolds number (w/o  B)  = {:.1e}'.format(Re))
 # print ('')
 
@@ -372,7 +372,7 @@ print ('Magnetic diffusivity      = {:.2e}'.format(mag_diff*1e-4), '[m^2/s]')
 mag_diff_time = space_scale**2/mag_diff
 print ('Magnetic diffusion time   = {:.2e}'.format(mag_diff_time*1e+9), '[ns]')     
 # Magnetic Reynolds ### advection (induction) of B by plasma motion / diffusion of B in the plasma
-Rm = V*space_scale/mag_diff  
+Rm = max(vth_i, V)*space_scale/mag_diff  
 print ('Magnetic Reynolds number  = {:.1e}'.format(Rm))
 
 # print ('')
@@ -389,12 +389,12 @@ print ('Magnetic Reynolds number  = {:.1e}'.format(Rm))
 kappa_e_B = 8.6e9*np.sqrt(A)*T_e/(Z*B)
 kappa_e_B = kappa_e_B
 ### electronic peclet number with B
-Pe_e_B = space_scale*V/kappa_e_B
+Pe_e_B = space_scale*max(vth_e, V)/kappa_e_B
 print ('Peclet number (with B)    = {:.1e}'.format(Pe_e_B))
 
 # electron thermal diffusivity without magnetic field
 Oe = 2.21e21 * T_e**2.5 / cou_log_brag / (Z+1) / n_e
-Pe = space_scale * V / Oe
+Pe = space_scale * max(vth_e, V) / Oe
 print ('Peclet number (w/o  B)    = {:.1e}'.format(Pe))
 
 # print ('')
