@@ -114,7 +114,7 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 
 # LULI2000 - Jan. 2025 - Turbulence
 # V = 0.5e+08; B = 1e5; T_e = 35; T_i = 10; n_e = 1e18; space_scale = 1.0; A = 1; Z = 1
-V = 0.0; B = 1e5; T_e = 35; T_i = 10; n_e = 2e17; space_scale = 1.0; A = 1; Z = 1
+# V = 0.0; B = 1e5; T_e = 35; T_i = 10; n_e = 2e17; space_scale = 1.0; A = 1; Z = 1
 
 
 
@@ -134,6 +134,9 @@ V = 0.0; B = 1e5; T_e = 35; T_i = 10; n_e = 2e17; space_scale = 1.0; A = 1; Z = 
 # RAL-2022-TAW before RCF analysis using PROBLEM
 # V = 1.0e7; B = 20.e4; T_e = 150.; T_i = 100; n_e = 1.44e19; space_scale = 0.1; A = 20.0; Z = 10.0  
 ## NOTE here V is for the turbulence
+
+# VULCAN
+V = 2.0e8; B = 10.e4; T_e = 100.; T_i = 200; n_e = 1.0e18; space_scale = 0.1; A = 1.0; Z = 1.0  
 
 # Weakly Collisional shock
 # V = 5.0e7; B = 0.01; T_e = 50.; T_i = 50; n_e = 1.0e19; space_scale = 0.1; A = 14.0; Z = 3.0  
