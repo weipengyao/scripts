@@ -24,10 +24,10 @@ def compute_scale_length(x1_um, n1_cc, x2_um, n2_cc):
 
 # Example usage:
 if __name__ == "__main__":
-    x1 = -20.0       # in microns
-    n1 = 1e20        # in cm^-3
-    x2 = 0.0       # in microns
-    n2 = 5e22        # in cm^-3
+    x1 = -80.0       # in microns
+    n1 = 1e19        # in cm^-3
+    x2 = -58.0       # in microns
+    n2 = 3.8e22        # in cm^-3
 
     L = compute_scale_length(x1, n1, x2, n2)
     print(f"Scale length L = {L:.4f} microns")

@@ -3,19 +3,19 @@ import numpy as np
 ###############################################################################
 ### Fundamental parameters
 e_charge = 1.6022e-19 # [C] electron charge
-e_charge_cgs = 4.8e-10  # [statcoul] 
-mass_proton = 1.6726e-24 # [g] proton mass 
+e_charge_cgs = 4.8e-10  # [statcoul]
+mass_proton = 1.6726e-24 # [g] proton mass
 mass_electron = 9.109e-28  # [g] electron mass
 c_cgs         = 3.0e10     # [cm/s]
 gamma = 5./3 # adiabatic index
 K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 ###############################################################################
 ### Input parameters for the plasma system in CGS units, except T_e, T_i are mostly [eV] (1.16e4 for K conversion)
-# V [cm/c] - speed 
+# V [cm/c] - speed
 # B [G] - magnetic field strength (1 T = 1e4 G)
 # T_e [eV] - electron temperature
 # T_i [ev] - ion temperature
-# n_e [cm-3] - electron density 
+# n_e [cm-3] - electron density
 # space_scale [cm] - scale of the object
 # A averaged mass number (for (C_2F_4)_n = (2*12.0096*m_c+4*18.998*m_f*2)/(2*12.0096+4*18.998*2)) = 17.32*m_p)
 # Z averaged charge state
@@ -23,7 +23,7 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 
 ###############################################################################
 ### Input parameters for specified systems:
-### uncomment only one line of the system of the interest to have the output values 
+### uncomment only one line of the system of the interest to have the output values
 ### *** LABORATORY *** ###
 ### ELFIE Lab Parameters (10, 20 and 30 T)
 #V = 6e7; B = 10e4; T_e = 40; T_i = 40; n_e = 1.0e19; space_scale = 0.1; A = 17.32; Z = 5.92
@@ -129,17 +129,29 @@ K_Bol = 1.38e-16 # Boltsmann constant in CGS units
 
 
 # TNSA-B propagation
-# V = 4.2e8; B = 20.e4; T_e = 140.; T_i = 140; n_e = 2.e18; space_scale = 0.1; A = 1.0; Z = 1.0 
+# V = 4.2e8; B = 20.e4; T_e = 140.; T_i = 140; n_e = 2.e18; space_scale = 0.1; A = 1.0; Z = 1.0
 
 # RAL-2022-TAW before RCF analysis using PROBLEM
-# V = 1.0e7; B = 20.e4; T_e = 150.; T_i = 100; n_e = 1.44e19; space_scale = 0.1; A = 20.0; Z = 10.0  
+# V = 1.0e7; B = 20.e4; T_e = 150.; T_i = 100; n_e = 1.44e19; space_scale = 0.1; A = 20.0; Z = 10.0
 ## NOTE here V is for the turbulence
 
 # VULCAN
-V = 2.0e8; B = 10.e4; T_e = 100.; T_i = 200; n_e = 1.0e18; space_scale = 0.1; A = 1.0; Z = 1.0  
+V = 2.0e8; B = 10.e4; T_e = 100.; T_i = 200; n_e = 1.0e18; space_scale = 0.1; A = 1.0; Z = 1.0
+
+# inter-planetary shock
+# V = 4.0e7; B = 1.e-4; T_e = 10.; T_i = 10; n_e = 20.0; space_scale = 1e7; A = 1.0; Z = 1.0
+
+# Supernova remnant shock
+# V = 1.0e8; B = 1.e-6; T_e = 300.; T_i = 300.; n_e = 1.0; space_scale = 6e19; A = 1.0; Z = 1.0
+
+# galaxy cluster accretion shock
+# V = 1.0e8; B = 1.e-6; T_e = 2e3; T_i = 2e3; n_e = 1e-2; space_scale = 3e24; A = 1.0; Z = 1.0
+
+# AGN jet shock
+# V = 1.0e9; B = 1.e-7; T_e = 1e3; T_i = 1e3; n_e = 1.e-2; space_scale = 3e18; A = 1.0; Z = 1.0
 
 # Weakly Collisional shock
-# V = 5.0e7; B = 0.01; T_e = 50.; T_i = 50; n_e = 1.0e19; space_scale = 0.1; A = 14.0; Z = 3.0  
+# V = 5.0e7; B = 0.01; T_e = 50.; T_i = 50; n_e = 1.0e19; space_scale = 0.1; A = 14.0; Z = 3.0
 
 
 ### Earth's bow shock
@@ -199,7 +211,7 @@ m_i = A * mass_proton   # [g]
 n_i = n_e/Z             # [cm-3]
 rho = n_i*m_i           # [g/cm3]
 
-### Printing input parameters: ### 
+### Printing input parameters: ###
 print ('')
 print ('Parameters:------------------')
 print ('')
@@ -208,7 +220,7 @@ print ('B-field                   = {:.1e}'.format(B),           '[G]')
 print ('Electron temperature T_e  = {:.1f}'.format(T_e),         '[eV]')
 print ('Ion temperature T_i       = {:.1f}'.format(T_i),         '[eV]')
 print ('Electron density n_e      = {:.1e}'.format(n_e),    	   '[cm-3]')
-print ('Ion density n_i           = {:.1e}'.format(n_i),         '[cm-3]')   
+print ('Ion density n_i           = {:.1e}'.format(n_i),         '[cm-3]')
 print ('Density rho               = {:.1e}'.format(rho),         '[g/cm-3]')
 print ('Charge state Z            = {:.1f}'.format(Z))
 print ('Mass number A             = {:.1f}'.format(A))
@@ -244,7 +256,7 @@ print ('Alfven velocity           = {:.1e}'.format(c_alfven), '[cm/s]')
 c_magnetosonic = np.sqrt(c_sound**2 + c_alfven**2)
 print ('c_magnetosonic velocity   = {:.1e}'.format(c_magnetosonic), '[cm/s]')
 
-# print ('')
+print ('')
 
 ### electron collision time
 f_e = 2.91e-6*Z*(n_e)*cou_log_brag*(T_e)**(-3./2) # [s-1]  Formula from NRL p.28
@@ -258,7 +270,7 @@ print ('Electron mean free path   = {:.2e}'.format(mfp_e),      '[cm]')
 print ('Electron collision time   = {:.2e}'.format(tau_e*1e+9), '[ns]')
 # print ('Electron collisionality   = {:.2e}'.format(mfp_e / space_scale))
 
-# print ('')
+print ('')
 
 ### ion collision time
 f_i = 4.8e-8*Z**4*(A)**(-1./2)*n_i*cou_log_brag*(T_i)**(-3./2) # [s-1]  Formula from NRL p.28
@@ -272,7 +284,7 @@ print ('Ion mean free path        = {:.1e}'.format(mfp_i),      '[cm]')
 print ('Ion collision time        = {:.2e}'.format(tau_i*1e+9), '[ns]')
 # print ('Ion collisionality        = {:.2e}'.format(mfp_i / space_scale))
 
-# print ('')
+print ('')
 
 ### electron gyroradius and gyrofrequency
 # gyro_e = mass_electron/(e_charge*B) * max(vth_e, V) # [cm]
@@ -285,9 +297,9 @@ print ('Electron Larmor period    = {:.1e}'.format(1./gyrofreq_e),     '[s]')
 omega_tau_e = e_charge_cgs*B*tau_e/mass_electron/c_cgs
 # print ('Electron magnetization    = {:.2f}'.format(omega_tau_e))
 print ('Hall parameter for eon He = {:.2f}'.format(mfp_e/gyro_e))
-   
-# print ('') 
- 
+
+# print ('')
+
 ### ions gyroradius and gyrofrequency
 gyro_freq_i = (Z*e_charge_cgs*B)/m_i/c_cgs/(2.*np.pi)  # [s^-1]
 gyro_i = m_i*c_cgs/(Z*e_charge_cgs*B) * max(vth_i, V) # [cm]
@@ -308,13 +320,17 @@ print ('Hall parameter for ion Hi = {:.8f}'.format(mfp_i/gyro_i))
 
 ### ion inertial length
 di = 2.28e7 * Z**(-1) * (A/n_i)**(0.5)  #[cm]
-# print ('Ion inertial length di    = {:.2e}'.format(di),     '[cm]')
+print ('Ion inertial length di    = {:.2e}'.format(di),     '[cm]')
 
 ### electron inertial length
 de = 5.31e5 * (1/n_e)**(0.5)  #[cm]
-# print ('Electron inertial length de    = {:.2e}'.format(de),     '[cm]')
+print ('Electron inertial length de    = {:.2e}'.format(de),     '[cm]')
 
-### Cooling time  
+print ('ion mean-free-path / inertial length = {:.2e}'.format(mfp_i/di))
+print ('ion mean-free-path / Larmor radius = {:.2e}'.format(mfp_i/gyro_i))
+print ('Larmor radius / inertial length = {:.2e}'.format(gyro_i/di))
+
+### Cooling time
 cool_rate = 1.7*10e-25*(Z**2)*T_e**(1./2) # normalized cooling rate
 cooling_time_thin = 4.0e-36*A*(1+Z)*T_e/(Z*rho*cool_rate)
 # print ('Cooling rate              = {:.2e}'.format(cool_rate))
@@ -328,7 +344,7 @@ P_dyn = rho*V**2
 
 beta_ther_CGS = P_ther/(B**2.0/(8*np.pi))
 print ('Beta thermic              = {:.1e}'.format(beta_ther_CGS)) # [P_ther/(B^2/(8*pi))]
-beta_dyn_CGS = rho*V**2.0/(B**2.0/(8*np.pi)) 
+beta_dyn_CGS = rho*V**2.0/(B**2.0/(8*np.pi))
 print ('Beta dynamic              = {:.1e}'.format(beta_dyn_CGS)) # [P_dyn/(B^2/(8*pi))]
 
 print ('Beta dynamic + thermal    = {:.1e}'.format(beta_dyn_CGS+beta_ther_CGS)) # [P_dyn/(B^2/(8*pi))]
@@ -344,9 +360,9 @@ beta_ther_e_CGS = P_ther_e/(B**2.0/(8*np.pi))
 mach_sonore = max(vth_i, V)/c_sound
 print ('Mach number               = {:.2e}'.format(mach_sonore))
 mach_alfvenique = max(vth_i, V)/c_alfven
-print ('Alfven Mach number        = {:.2e}'.format(mach_alfvenique))    
+print ('Alfven Mach number        = {:.2e}'.format(mach_alfvenique))
 mach_magnetosonic = max(vth_i, V)/c_magnetosonic
-print ('Magnetosonic Mach number  = {:.2e}'.format(mach_magnetosonic))    
+print ('Magnetosonic Mach number  = {:.2e}'.format(mach_magnetosonic))
 
 # print ('')
 
@@ -373,9 +389,9 @@ Spitzer_resi = 1.0/Spitzer_condu
 mag_diff = Spitzer_resi/(4.*np.pi)
 print ('Magnetic diffusivity      = {:.2e}'.format(mag_diff*1e-4), '[m^2/s]')
 mag_diff_time = space_scale**2/mag_diff
-print ('Magnetic diffusion time   = {:.2e}'.format(mag_diff_time*1e+9), '[ns]')     
+print ('Magnetic diffusion time   = {:.2e}'.format(mag_diff_time*1e+9), '[ns]')
 # Magnetic Reynolds ### advection (induction) of B by plasma motion / diffusion of B in the plasma
-Rm = max(vth_i, V)*space_scale/mag_diff  
+Rm = max(vth_i, V)*space_scale/mag_diff
 print ('Magnetic Reynolds number  = {:.1e}'.format(Rm))
 
 # print ('')
@@ -409,7 +425,7 @@ Euler_CGS = (P_dyn/P_ther)**(1./2)
 print ('Euler number              = {:.1e}'.format(Euler_CGS)) # [sqrt(P_dyn/P_ther)]
 
 Alfven_CGS = B/(4*np.pi*P_ther)**(1./2)
-# print 'Alfven number             = {:.2f}'.format(Alfven_CGS) # [B/sqrt(4pi*P)] 
+# print 'Alfven number             = {:.2f}'.format(Alfven_CGS) # [B/sqrt(4pi*P)]
 
 # print ('')
 
@@ -427,13 +443,13 @@ od = 5e-38 * n_e * n_i * Z**2 * g_bar * space_scale * T_e**-3.5
 ###############################################################################
 ### PRINT PRINT PRINT ### Just to round the values
 
-# ### Printing input parameters: ### 
+# ### Printing input parameters: ###
 # print 'Flow velocity V  =', round(V*1e-5,2), '[km/s]'
 # print 'B-field =', round(B), '[G]'
 # print 'Electron temperature T_e =', round(T_e,1), '[eV]'
 # print 'Ion temperature T_i =', round(T_i,1),  '[eV]'
 # print 'Electron density n_e =', round(n_e,-10), '[cm-3]'
-# print 'Ion density n_i =', round(n_i,-10), '[cm-3]'   
+# print 'Ion density n_i =', round(n_i,-10), '[cm-3]'
 # print 'Density rho =', round(rho,13), '[g/cm-3]'
 # print 'Charge state Z =', round(Z,3)
 # print 'Mass number A =', round(A,2)
@@ -457,7 +473,7 @@ od = 5e-38 * n_e * n_i * Z**2 * g_bar * space_scale * T_e**-3.5
 # print 'Electron Larmor radius =', round(gyro_e,5), '[cm]'
 # print 'Electron gyrofrequency =', round(gyrofreq_e,-8), '[s-1]'
 # print 'Electron magnetization =', round(omega_tau_e,2)
-# print ''   
+# print ''
 # print 'Ion Larmor radius =', round(gyro_i,3), '[cm]'
 # print 'Ion gyrofrequency =', round(gyrofreq_i,-4), '[s-1]'
 # print 'Ion magnetization =', round(omega_tau_i,2)
@@ -466,9 +482,9 @@ od = 5e-38 * n_e * n_i * Z**2 * g_bar * space_scale * T_e**-3.5
 # #print 'Cooling time - thin =', round(cooling_time_thin*1e+9,-5), '[ns]'
 # #print ''
 # print 'Mach number =', round(mach_sonore,2)
-# print 'Alfven Mach number =', round(mach_sup_alfvenique,2)    
+# print 'Alfven Mach number =', round(mach_sup_alfvenique,2)
 # print ''
-# print 'Magnetic diffusion time =', round(mag_diff_time*1e+9,-22), '[ns]'     
+# print 'Magnetic diffusion time =', round(mag_diff_time*1e+9,-22), '[ns]'
 # print 'Magnetic Reynolds number =', round(Rm,-10)
 # print 'Reynolds number =', round(Re_i_B,2)
 # print 'Peclet number =', round(Pe_e_B,-8)
