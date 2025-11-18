@@ -45,6 +45,7 @@ import scienceplots as splt
 plt.style.use(["nature", "notebook", "grid", "high-vis"])
 
 wkdir = [
+    ## different benchmark cases
     #  '/Users/yao/Documents/Data/IFE/test0/laser_propagation_3d', # with only test particles
     #  '/Users/yao/Documents/Data/IFE/test0/laser_propagation_3d_target/', # with a thin foil target
     #  '/Users/yao/Desktop/test1/',
@@ -54,44 +55,47 @@ wkdir = [
     #  '/Users/yao/Desktop/data/ife_yao2_cp3/',
     #  '/Users/yao/Desktop/ife_yao3/',
     #  '/Users/yao/Documents/Data/IFE/ife_yao1_Ly25.6/',
-    "/Users/yao/Documents/Data/IFE/ife_yao4_benchmark_probe_reso/",  # a0=225, tp=5t0, ne=60nc
-    "/Users/yao/Documents/Data/IFE/ife_yao6/",  # a0=300, tp=5t0, ne=60nc
-    "/Users/yao/Documents/Data/IFE/ife_yao9/",  # a0=325, tp=5t0, ne=60nc
-    "/Users/yao/Documents/Data/IFE/ife_yao7/",  # a0=350, tp=5t0, ne=60nc
-    "/Users/yao/Documents/Data/IFE/ife_yao10/",  # a0=375, tp=5t0, ne=60nc
-    "/Users/yao/Documents/Data/IFE/ife_yao8/",  # a0=400, tp=5t0, ne=60nc
-    "/Users/yao/Documents/Data/IFE/ife_yao5/",  # a0=450, tp=5t0, ne=60nc
-    "/Users/yao/Documents/Data/IFE/ife_yao11/",  # a0=225, tp=50t0, ne=60nc
-    "/Users/yao/Documents/Data/IFE/ife_yao12/",  # a0=225, tp=5t0, ne=15nc
+    ## start to scan a0 from here
+    # "/Users/yao/Documents/Data/IFE/ife_yao4_benchmark_probe_reso/",  # a0=225, tp=5t0, ne=60nc
+    # "/Users/yao/Documents/Data/IFE/ife_yao6/",  # a0=300, tp=5t0, ne=60nc
+    # "/Users/yao/Documents/Data/IFE/ife_yao9/",  # a0=325, tp=5t0, ne=60nc
+    # "/Users/yao/Documents/Data/IFE/ife_yao7/",  # a0=350, tp=5t0, ne=60nc
+    # "/Users/yao/Documents/Data/IFE/ife_yao10/",  # a0=375, tp=5t0, ne=60nc
+    # "/Users/yao/Documents/Data/IFE/ife_yao8/",  # a0=400, tp=5t0, ne=60nc
+    # "/Users/yao/Documents/Data/IFE/ife_yao5/",  # a0=450, tp=5t0, ne=60nc
+    # "/Users/yao/Documents/Data/IFE/ife_yao11/",  # a0=225, tp=50t0, ne=60nc
+    # "/Users/yao/Documents/Data/IFE/ife_yao12/",  # a0=225, tp=5t0, ne=15nc
+    ## start to check the density effect
+    "/Users/yao/Documents/Data/IFE/ife_yao13/",  # a0=350, tp=5t0, ne=240nc
 ]
 
 S0 = happi.Open(
     wkdir[0], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
 )
-S1 = happi.Open(
-    wkdir[1], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
-)
-S2 = happi.Open(
-    wkdir[2], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
-)
-S3 = happi.Open(
-    wkdir[3], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
-)
-S4 = happi.Open(
-    wkdir[4], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
-)
-S5 = happi.Open(
-    wkdir[5], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
-)
-S6 = happi.Open(
-    wkdir[6], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
-)
-S7 = happi.Open(
-    wkdir[7], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
-)
-S8 = happi.Open(
-    wkdir[8], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
-)
+# S1 = happi.Open(
+#     wkdir[1], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
+# )
+# S2 = happi.Open(
+#     wkdir[2], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
+# )
+# S3 = happi.Open(
+#     wkdir[3], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
+# )
+# S4 = happi.Open(
+#     wkdir[4], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
+# )
+# S5 = happi.Open(
+#     wkdir[5], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
+# )
+# S6 = happi.Open(
+#     wkdir[6], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
+# )
+# S7 = happi.Open(
+#     wkdir[7], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
+# )
+# S8 = happi.Open(
+#     wkdir[8], reference_angular_frequency_SI=2.0 * np.pi * 3e8 / (1.0 * 1e-6)
+# )
 
 # Get simulation box size
 Lx = S0.namelist.Lx / 2 / np.pi  # in um
@@ -107,6 +111,7 @@ def get_fft(S, time, vmin0, vmax0):
     data = np.array(Bx.getData()[time])
     field_x = np.array(Bx.getAxis("axis1"))
     field_y = np.array(Bx.getAxis("axis2"))
+    print("time = ", Bx.getTimes()[time], " fs")
 
     plt.figure(figsize=(6, 5))
     plt.imshow(
@@ -123,7 +128,8 @@ def get_fft(S, time, vmin0, vmax0):
     plt.ylabel("y (um)")
     plt.title("Bx field in real space (before FFT)")
     plt.tight_layout()
-    plt.show()
+    plt.savefig("data_before_FFT.png", dpi=300)
+    # plt.show()
 
     Nx = data.shape[0]
     Ny = data.shape[1]
@@ -165,7 +171,8 @@ def get_fft(S, time, vmin0, vmax0):
     plt.xlim(-2, 2)
     plt.ylim(-2, 2)
     plt.tight_layout()
-    plt.show(block=True)
+    plt.savefig("FFT_shift_zoom.png", dpi=300)
+    # plt.show(block=True)
 
     print(
         "With these plots, you can identify the dominant spatial frequencies in the Bx field."
@@ -233,7 +240,8 @@ def apply_mask_and_ifft(data_fft, kx, ky, KX, KY, k0x, k0y, wx, wy):
     plt.xlim(-2, 2)
     plt.ylim(-2, 2)
     plt.tight_layout()
-    plt.show(block=True)
+    plt.savefig("FFT_masked_shift_zoom.png", dpi=300)
+    # plt.show(block=True)
 
     return data_fft_masked
 
@@ -256,7 +264,8 @@ def compute_ifft(data_fft_masked, field_x, field_y, vmin0, vmax0):
     plt.ylabel("y (um)")
     plt.title("Filtered Bx field in real space (after IFFT)")
     plt.tight_layout()
-    plt.show(block=True)
+    plt.savefig("data_after_FFT.png", dpi=300)
+    # plt.show(block=True)
 
     return data_ifft
 
@@ -276,9 +285,22 @@ def plot_comparison(Bx_original, Bx_filtered):
     plt.xlim(0, Lx)
     plt.legend()
     plt.tight_layout()
-    plt.show()
+    plt.savefig("data_lineout.png", dpi=300)
+    # plt.show(block=True)
+    #
+    pos = 450
+    # print(xx[pos])
+    #
+    print("max Bx_ori = ", np.max(np.abs(Bx_original[pos:, Ny // 2])), " GG")
+    print("max Bx_filt = ", np.max(np.abs(Bx_filtered[pos:, Ny // 2])), " GG")
+    print(
+        "error bar = ",
+        np.max(np.abs(Bx_original[pos:, Ny // 2]))
+        - np.max(np.abs(Bx_filtered[pos:, Ny // 2])),
+        " GG",
+    )
 
-    cell_y = 60  # 1 cell = 0.04 um along y
+    cell_y = 48  # 1 cell = 0.04 um along y
     center = int(Bx_original.shape[1] / 2)
 
     plt.figure(figsize=(6, 5))
@@ -306,7 +328,8 @@ def plot_comparison(Bx_original, Bx_filtered):
     plt.legend()
     plt.xlim(0, Lx)
     plt.tight_layout()
-    plt.show(block=True)
+    plt.savefig("data_lineout_averaged.png", dpi=300)
+    # plt.show(block=True)
 
 
 def post_process_Bx_field(S, k0x, k0y, wx, wy, timestep, vmin0, vmax0):
@@ -319,7 +342,7 @@ def post_process_Bx_field(S, k0x, k0y, wx, wy, timestep, vmin0, vmax0):
 
 
 post_process_Bx_field(
-    S8, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=-1, vmin0=-2, vmax0=2
+    S0, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=14, vmin0=-2, vmax0=2
 )
 # post_process_Bx_field(
 # S2, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=-1, vmin0=-2, vmax0=2

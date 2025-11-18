@@ -27,6 +27,9 @@ a0 = np.array([280, 300, 325, 350, 375, 400, 500], dtype=float)
 Bx = np.array([0.28, 0.53, 0.78, 1.27, 1.60, 2.05, 3.30], dtype=float)
 
 a1 = np.array([225, 300, 325, 350, 375, 400, 450], dtype=float)
+a2 = np.array([300, 325, 350, 375, 400], dtype=float)
+Bx2 = np.array([0.45, 0.75, 0.82, 0.85, 0.70], dtype=float)
+yerr2 = np.array([0.14, 0.10, 0.16, 0.09, 0.08], dtype=float)
 # Bx1 = np.array([0.46, 0.38, 3.14, 1.88, 2.21], dtype=float) # filter: 0.5, 15
 # Bx1 = np.array([0.17, 0.37, 1.77, 1.60, 1.85], dtype=float) # filter: 0.3, 1.5
 Bx1_low = np.array(
@@ -64,6 +67,11 @@ C1 = np.exp(logC1)
 a1_fit = np.linspace(200, 520, 300)
 Bx1_fit = C1 * a1_fit**p1
 
+log_a2 = np.log(a2)
+log_Bx2 = np.log(Bx2)
+p2, logC2 = np.polyfit(log_a2, log_Bx2, 1)
+C2 = np.exp(logC2)
+
 # ---- Plot ----
 plt.figure(figsize=(6, 5))
 plt.scatter(
@@ -84,9 +92,23 @@ plt.errorbar(
     linewidth=1.5,
     markersize=6,
     color="red",
-    label="new 3D PIC data",
+    label="new 3D PIC data -- 300 fs",
 )
-plt.plot(a1_fit, Bx1_fit, ":", lw=1.6, color="r", label="fitting new")
+# plt.plot(a1_fit, Bx1_fit, ":", lw=1.6, color="r", label="fitting new 300 fs")
+
+plt.errorbar(
+    a2,
+    Bx2,
+    yerr=yerr2,
+    fmt="o",
+    capsize=6,
+    linewidth=1.5,
+    markersize=8,
+    color="green",
+    label="new 3D PIC data -- < 300 fs",
+)
+Bx2_fit = C2 * a1_fit**p2
+# plt.plot(a1_fit, Bx2_fit, "-.", lw=1.6, color="g", label="fitting new < 300 fs")
 
 
 # Axes style to match the original figure
@@ -97,8 +119,8 @@ plt.ylim(0.0, 6.0)
 plt.legend()
 plt.title(f"Fitted power law: Bx = {C:.3e} * a0^{p:.2f}")
 plt.tight_layout()
-plt.show()
+# plt.show()
 
 # Print the fitted law for reference
 # print(f"Fitted power law: Bx = {C:.3e} * a0^{p:.2f}")
-# plt.savefig('/Users/yao/Desktop/scaling.png', dpi=300, bbox_inches='tight')
+plt.savefig("/Users/yao/Desktop/scaling.png", dpi=300, bbox_inches="tight")
