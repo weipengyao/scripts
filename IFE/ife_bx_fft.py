@@ -66,7 +66,10 @@ wkdir = [
     # "/Users/yao/Documents/Data/IFE/ife_yao11/",  # a0=225, tp=50t0, ne=60nc
     # "/Users/yao/Documents/Data/IFE/ife_yao12/",  # a0=225, tp=5t0, ne=15nc
     ## start to check the density effect
-    "/Users/yao/Documents/Data/IFE/ife_yao13/",  # a0=350, tp=5t0, ne=240nc
+    # "/Users/yao/Documents/Data/IFE/ife_yao13/",  # a0=350, tp=5t0, ne=240nc
+    ## start to check the Ly and Lz effect
+    # "/Users/yao/Documents/Data/IFE/ife_yao14/",  # a0=350, tp=5t0, ne=60nc, Ly=25.6um, Lz=25.6um
+    "/Users/yao/Documents/Data/IFE/ife_yao15/",  # a0=350, tp=5t0, ne=60nc, Ly=102.4um, Lz=102.4um
 ]
 
 S0 = happi.Open(
