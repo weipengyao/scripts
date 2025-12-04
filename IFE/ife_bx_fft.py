@@ -69,7 +69,14 @@ wkdir = [
     # "/Users/yao/Documents/Data/IFE/ife_yao13/",  # a0=350, tp=5t0, ne=240nc
     ## start to check the Ly and Lz effect
     # "/Users/yao/Documents/Data/IFE/ife_yao14/",  # a0=350, tp=5t0, ne=60nc, Ly=25.6um, Lz=25.6um
-    "/Users/yao/Documents/Data/IFE/ife_yao15/",  # a0=350, tp=5t0, ne=60nc, Ly=102.4um, Lz=102.4um
+    # "/Users/yao/Documents/Data/IFE/ife_yao15/",  # a0=350, tp=5t0, ne=60nc, Ly=102.4um, Lz=102.4um
+    # "/Users/yao/Documents/Data/IFE/ife_yao16/",  # a0=350, tp=5t0, ne=60nc, Ly=51.2um, Lz=51.2um, RR=ll
+    # "/Users/yao/Documents/Data/IFE/ife_yao17/",  # a0=350, tp=5t0, ne=60nc, Ly=51.2um, Lz=51.2um, RR=cll
+    # "/Users/yao/Documents/Data/IFE/ife_yao18/",  # a0=400, tp=5t0, ne=60nc, Ly=51.2um, Lz=51.2um, RR=ll
+    # "/Users/yao/Documents/Data/IFE/ife_yao19/",  # a0=300, tp=5t0, ne=60nc, Ly=51.2um, Lz=51.2um, RR=ll,
+    "/Users/yao/Documents/Data/IFE/ife_yao22/",  # a0=500, tp=5t0, ne=60nc, Ly=51.2um, Lz=51.2um, RR=cll,
+    # "/Users/yao/Documents/Data/IFE/ife_yao23/",  # a0=450, tp=5t0, ne=60nc, Ly=51.2um, Lz=51.2um, RR=cll,
+    # "/Users/yao/Documents/Data/IFE/AnnaOldData/Convergency_a0300_ne120_res20/",  # a0=300, tp=5t0, ne=120nc, Ly=25.6um, Lz=25.6um, RR=ll,
 ]
 
 S0 = happi.Open(
@@ -131,7 +138,7 @@ def get_fft(S, time, vmin0, vmax0):
     plt.ylabel("y (um)")
     plt.title("Bx field in real space (before FFT)")
     plt.tight_layout()
-    plt.savefig("data_before_FFT.png", dpi=300)
+    plt.savefig(wkdir[0] + "data_before_FFT.png", dpi=300)
     # plt.show()
 
     Nx = data.shape[0]
@@ -174,7 +181,7 @@ def get_fft(S, time, vmin0, vmax0):
     plt.xlim(-2, 2)
     plt.ylim(-2, 2)
     plt.tight_layout()
-    plt.savefig("FFT_shift_zoom.png", dpi=300)
+    plt.savefig(wkdir[0] + "FFT_shift_zoom.png", dpi=300)
     # plt.show(block=True)
 
     print(
@@ -243,7 +250,7 @@ def apply_mask_and_ifft(data_fft, kx, ky, KX, KY, k0x, k0y, wx, wy):
     plt.xlim(-2, 2)
     plt.ylim(-2, 2)
     plt.tight_layout()
-    plt.savefig("FFT_masked_shift_zoom.png", dpi=300)
+    plt.savefig(wkdir[0] + "FFT_masked_shift_zoom.png", dpi=300)
     # plt.show(block=True)
 
     return data_fft_masked
@@ -267,7 +274,7 @@ def compute_ifft(data_fft_masked, field_x, field_y, vmin0, vmax0):
     plt.ylabel("y (um)")
     plt.title("Filtered Bx field in real space (after IFFT)")
     plt.tight_layout()
-    plt.savefig("data_after_FFT.png", dpi=300)
+    plt.savefig(wkdir[0] + "data_after_FFT.png", dpi=300)
     # plt.show(block=True)
 
     return data_ifft
@@ -288,20 +295,33 @@ def plot_comparison(Bx_original, Bx_filtered):
     plt.xlim(0, Lx)
     plt.legend()
     plt.tight_layout()
-    plt.savefig("data_lineout.png", dpi=300)
+    plt.savefig(wkdir[0] + "data_lineout.png", dpi=300)
     # plt.show(block=True)
     #
-    pos = 450
-    # print(xx[pos])
+    # pos = 450
+    pos = 350
+    print(xx[pos])
     #
-    print("max Bx_ori = ", np.max(np.abs(Bx_original[pos:, Ny // 2])), " GG")
-    print("max Bx_filt = ", np.max(np.abs(Bx_filtered[pos:, Ny // 2])), " GG")
-    print(
-        "error bar = ",
-        np.max(np.abs(Bx_original[pos:, Ny // 2]))
-        - np.max(np.abs(Bx_filtered[pos:, Ny // 2])),
-        " GG",
-    )
+    with open(wkdir[0] + "results.txt", "w") as f:
+        print(
+            "max Bx_ori = ",
+            np.max(np.abs(Bx_original[pos:, Ny // 2])),
+            " GG",
+            file=f,
+        )
+        print(
+            "max Bx_filt = ",
+            np.max(np.abs(Bx_filtered[pos:, Ny // 2])),
+            " GG",
+            file=f,
+        )
+        print(
+            "error bar = ",
+            np.max(np.abs(Bx_original[pos:, Ny // 2]))
+            - np.max(np.abs(Bx_filtered[pos:, Ny // 2])),
+            " GG",
+            file=f,
+        )
 
     cell_y = 48  # 1 cell = 0.04 um along y
     center = int(Bx_original.shape[1] / 2)
@@ -331,7 +351,7 @@ def plot_comparison(Bx_original, Bx_filtered):
     plt.legend()
     plt.xlim(0, Lx)
     plt.tight_layout()
-    plt.savefig("data_lineout_averaged.png", dpi=300)
+    plt.savefig(wkdir[0] + "data_lineout_averaged.png", dpi=300)
     # plt.show(block=True)
 
 
@@ -344,8 +364,9 @@ def post_process_Bx_field(S, k0x, k0y, wx, wy, timestep, vmin0, vmax0):
     plot_comparison(Bx0, Bx0_ifft)
 
 
+# post_process_Bx_field(S0, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=81, vmin0=-2, vmax0=2)
 post_process_Bx_field(
-    S0, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=14, vmin0=-2, vmax0=2
+    S0, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=16, vmin0=-2, vmax0=2
 )
 # post_process_Bx_field(
 # S2, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=-1, vmin0=-2, vmax0=2
