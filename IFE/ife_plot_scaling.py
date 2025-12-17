@@ -43,16 +43,19 @@ Bx = np.array([0.28, 0.53, 0.78, 1.27, 1.60, 2.05, 3.30], dtype=float)
 # yerr_upper = Bx1_up - Bx1
 # yerr = np.vstack([yerr_lower, yerr_upper])
 
-a2 = np.array([300, 325, 350, 375, 400], dtype=float)
-Bx2 = np.array([0.45, 0.75, 0.82, 0.85, 0.70], dtype=float)
-yerr2 = np.array([0.14, 0.10, 0.16, 0.09, 0.08], dtype=float)
+a2 = np.array([300, 325, 350, 375, 400, 450], dtype=float)
+Bx2 = np.array([0.43, 0.60, 0.68, 0.90, 0.73, 0.92], dtype=float)
+yerr2 = np.array([0.01, 0.14, 0.16, 0.01, 0.01, 0.10], dtype=float)
 
 a3 = np.array([250, 300, 350, 400, 450, 500], dtype=float)
 # Bx3 = np.array([0.31, 0.79, 1.18, 1.41, 2.52, 2.01], dtype=float)
 # yerr3 = np.array([0.04, 0.02, 0.20, 0.18, 0.11, 0.28], dtype=float)
 # at t=216 fs
-Bx3 = np.array([0.38, 0.67, 1.00, 1.75, 2.52, 2.22], dtype=float)
-yerr3 = np.array([0.36, 0.39, 0.48, 0.66, 0.11, 1.08], dtype=float)
+# Bx3 = np.array([0.38, 0.67, 1.00, 1.75, 2.52, 2.22], dtype=float)
+# yerr3 = np.array([0.36, 0.39, 0.48, 0.66, 0.11, 1.08], dtype=float)
+# at t=233 fs, and optimized the ave and err
+Bx3 = np.array([0.59, 0.75, 1.28, 1.83, 2.19, 2.15], dtype=float)
+yerr3 = np.array([0.16, 0.11, 0.10, 0.35, 0.03, 0.14], dtype=float)
 # at t=250 fs
 # Bx3 = np.array([0.45, 0.73, 0.95, 1.41, 1.81, 1.54], dtype=float)
 # yerr3 = np.array([0.05, 0.21, 0.33, 0.18, 0.16, 0.08], dtype=float)
@@ -95,9 +98,9 @@ plt.figure(figsize=(6, 5))
 plt.scatter(
     a0, Bx, s=120, color="b", label="former: with RR"
 )  # default color, similar to the figure
-plt.plot(
-    a0_fit, Bx_fit, "--", lw=1.6, color="b", label=f"fit Bx = {C:.2e} * a0^{p:.2f}"
-)  # dashed fit line
+# plt.plot(
+#     a0_fit, Bx_fit, "--", lw=1.6, color="b", label=f"fit Bx = {C:.2e} * a0^{p:.2f}"
+# )  # dashed fit line
 # plt.scatter(
 #     a1, Bx1, s=100, color="red", marker="x", label="new 3D PIC data"
 # )  # new data points
@@ -139,27 +142,27 @@ plt.errorbar(
     color="red",
     label="new: w. RR=LL",
 )
-plt.plot(
-    a0_fit, Bx3_fit, "-.", lw=1.6, color="r", label=f"fit Bx = {C3:.2e} * a0^{p3:.2f}"
-)
+# plt.plot(
+#     a0_fit, Bx3_fit, "-.", lw=1.6, color="r", label=f"fit Bx = {C3:.2e} * a0^{p3:.2f}"
+# )
 
 
 # Axes style to match the original figure
 plt.xlabel(r"$a_0$", fontsize=16)
 plt.ylabel(r"$B_x$ [GGauss]", fontsize=16)
-plt.xlim(200, 520)
-plt.ylim(0.0, 6.0)
+plt.xlim(200, 550)
+plt.ylim(0.0, 4.0)
 
-handles, labels = plt.gca().get_legend_handles_labels()
-# Reorder them manually in the sequence you want:
-# order = [3, 4, 0, 1, 2]  # example: new w/o RR → new w. RR → former → fit1 → fit2
-order = [0, 1, 4, 2, 3]
-plt.legend(
-    [handles[i] for i in order], [labels[i] for i in order], fontsize=14, frameon=True
-)
-# plt.legend()
+# handles, labels = plt.gca().get_legend_handles_labels()
+# # Reorder them manually in the sequence you want:
+# # order = [3, 4, 0, 1, 2]  # example: new w/o RR → new w. RR → former → fit1 → fit2
+# order = [0, 1, 4, 2, 3]
+# plt.legend(
+#     [handles[i] for i in order], [labels[i] for i in order], fontsize=14, frameon=True
+# )
+plt.legend()
 # plt.title(f"Fitted power law: Bx = {C:.3e} * a0^{p:.2f}")
-plt.title("at an early time=216 fs")
+# plt.title("at an early time=216 fs")
 plt.tight_layout()
 # plt.show()
 
