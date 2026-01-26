@@ -80,13 +80,12 @@ wkdir = [
     # "/Users/yao/Documents/Data/IFE/ife_yao22/",  # a0=500, tp=5t0, ne=60nc, Ly=51.2um, Lz=51.2um, RR=ll,
     # "/Users/yao/Documents/Data/IFE/ife_yao23/",  # a0=450, tp=5t0, ne=60nc, Ly=51.2um, Lz=51.2um, RR=cll,
     # "/Users/yao/Documents/Data/IFE/AnnaOldData/19_Convergency_a0300_ne120_res20/",  # a0=300, tp=5t0, ne=120nc, Ly=25.6um, Lz=25.6um, RR=ll, res=20
-    # "/Users/yao/Documents/Data/IFE/AnnaOldData/19_Convergency_a0300_ne120_res40/",  # a0=300, tp=5t0, ne=120nc, Ly=25.6um, Lz=25.6um, RR=ll, res=40
-    # "/Users/yao/Documents/Data/IFE/AnnaOldData/22_Convergency_a0500_ne120_res20/",  # a0=500, tp=5t0, ne=120nc, Ly=25.6um, Lz=25.6um, RR=ll,
+    "/Users/yao/Documents/Data/IFE/AnnaOldData/19_Convergency_a0300_ne120_res40/",  # a0=300, tp=5t0, ne=120nc, Ly=25.6um, Lz=25.6um, RR=ll, res=40
+    # "/Users/yao/Documents/Data/IFE/AnnaOldData/22_Convergency_a0500_ne120_res20/",  # a0=500, tp=5t0, ne=120nc, Ly=25.6um, Lz=25.6um, RR=ll, res=20
+    # "/Users/yao/Documents/Data/IFE/AnnaOldData/22_Convergency_a0500_ne120_res40/",  # a0=500, tp=5t0, ne=120nc, Ly=25.6um, Lz=25.6um, RR=ll, res=40
     # "/Users/yao/Documents/Data/IFE/ife_yao24/",  # a0=300, tp=5t0, ne=120nc, Ly=51.2um, Lz=51.2um, RR=cll,
-    "/Users/yao/Documents/Data/IFE/ife_yao25/",  # a0=300, tp=5t0, ne=120nc, Ly=51.2um, Lz=51.2um, RR=ll,
+    # "/Users/yao/Documents/Data/IFE/ife_yao25/",  # a0=300, tp=5t0, ne=120nc, Ly=51.2um, Lz=51.2um, RR=ll,
     # "/Users/yao/Documents/Data/IFE/ife_yao26/",  # a0=300, tp=5t0, ne=120nc, Ly=51.2um, Lz=51.2um, RR=no,
-
-
 ]
 
 S0 = happi.Open(
@@ -297,7 +296,7 @@ def plot_comparison(Bx_original, Bx_filtered, timestep):
     yy = np.linspace(0, Ly, Bx_original.shape[1])
 
     # pos = 450 # yao
-    pos = 350 # Anna
+    pos = 350  # Anna
     print(xx[pos])
 
     plt.figure(figsize=(6, 5))
@@ -308,7 +307,7 @@ def plot_comparison(Bx_original, Bx_filtered, timestep):
     plt.ylabel("Bx (1e5 T)")
     plt.title("Lineout of Bx at y=0")
     plt.xlim(0, Lx)
-    plt.ylim(-1.0, 0.5)
+    # plt.ylim(-1.0, 0.5)
     plt.legend()
     plt.tight_layout()
     plt.savefig(wkdir[0] + "data_lineout" + str(timestep) + ".png", dpi=300)
@@ -399,15 +398,15 @@ def post_process_Bx_field(S, k0x, k0y, wx, wy, timestep, vmin0, vmax0):
 
 
 # Anna's data -- the timesteps are different (71 = 233 fs)
-# post_process_Bx_field(
-#     S0, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=71, vmin0=-0.5, vmax0=0.5
-# )
+post_process_Bx_field(
+    S0, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=71, vmin0=-0.5, vmax0=0.5
+)
 
 # my data (14 = 233 fs)
-ts = 14 
-post_process_Bx_field(
-    S0, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=ts, vmin0=-0.5, vmax0=0.5
-)
+# ts = 14
+# post_process_Bx_field(
+#     S0, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=ts, vmin0=-0.5, vmax0=0.5
+# )
 # post_process_Bx_field(
 # S2, k0x=0.4, k0y=0.4, wx=0.3, wy=0.4, timestep=-1, vmin0=-2, vmax0=2
 # )
