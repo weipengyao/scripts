@@ -109,7 +109,14 @@ K_Bol = 1.38e-16  # Boltsmann constant in CGS units
 # V = 0.24e+08; B = 1; T_e = 2.3e4/1.16e4; T_i = 2.3e4/1.16e4; n_e = 1e9; space_scale = 2e11; A = 1.28; Z = 1
 
 # CME in lab with B = 3e5 G
-# V = 0.6e+08; B = 3e5; T_e = 5.0e5/1.16e4; T_i = 5.0e5/1.16e4; n_e = 7.5e18; space_scale = 1.0; A = 17.3; Z = 5.9
+V = 0.6e08
+B = 3e5
+T_e = 5.0e5 / 1.16e4
+T_i = 5.0e5 / 1.16e4
+n_e = 7.5e18
+space_scale = 1.0
+A = 17.3
+Z = 5.9
 
 
 # LULI2000 - Jan. 2025 - Turbulence
@@ -138,14 +145,14 @@ K_Bol = 1.38e-16  # Boltsmann constant in CGS units
 # V = 2.0e8; B = 10.e4; T_e = 100.; T_i = 200; n_e = 1.0e18; space_scale = 0.1; A = 1.0; Z = 1.0
 
 # Gekko & LULI
-V = 2.5e7
-B = 10.0e4
-T_e = 15.0
-T_i = 15
-n_e = 1.0e18
-space_scale = 0.1
-A = 4.0
-Z = 2.0
+# V = 2.5e7
+# B = 10.0e4
+# T_e = 15.0
+# T_i = 15
+# n_e = 1.0e18
+# space_scale = 0.1
+# A = 4.0
+# Z = 2.0
 
 
 # inter-planetary shock
