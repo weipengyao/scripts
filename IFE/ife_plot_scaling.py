@@ -60,6 +60,21 @@ yerr3 = np.array([0.16, 0.11, 0.10, 0.35, 0.03, 0.14], dtype=float)
 # Bx3 = np.array([0.45, 0.73, 0.95, 1.41, 1.81, 1.54], dtype=float)
 # yerr3 = np.array([0.05, 0.21, 0.33, 0.18, 0.16, 0.08], dtype=float)
 
+# ne=120nc, res=80, ppc=4
+a4    = np.array([  300,  400,  500,  600,  700], dtype=float)
+Bx4   = np.array([ 0.55, 1.41, 2.16, 2.25, 2.92], dtype=float)
+yerr4 = np.array([0.004, 0.16, 0.17, 0.26, 0.28], dtype=float)
+
+# ne=120nc, res=80, ppc=1
+a5    = np.array([  200,  700], dtype=float)
+Bx5   = np.array([ 0.39, 3.20], dtype=float)
+yerr5 = np.array([0.001, 0.06], dtype=float)
+
+# ne=60nc, res=80, ppc=4
+a6    = np.array([  500,  600], dtype=float)
+Bx6   = np.array([ 1.93, 3.13], dtype=float)
+yerr6 = np.array([ 0.12, 0.31], dtype=float)
+
 
 # ---- Fit a power law: Bx = C * a0^p ----
 log_a0 = np.log(a0)
@@ -68,7 +83,7 @@ p, logC = np.polyfit(log_a0, log_Bx, 1)
 C = np.exp(logC)
 
 # Smooth curve for the fitted relation
-a0_fit = np.linspace(200, 520, 300)
+a0_fit = np.linspace(180, 720, 500)
 Bx_fit = C * a0_fit**p
 
 # fit a power law to the new data points as well (optional)
@@ -96,7 +111,8 @@ Bx3_fit = C3 * a0_fit**p3
 # ---- Plot ----
 plt.figure(figsize=(6, 5))
 plt.scatter(
-    a0, Bx, s=120, color="b", label="former: with RR"
+    a0, Bx, s=120, color="b", label="former: with RR",
+    facecolors="none",
 )  # default color, similar to the figure
 # plt.plot(
 #     a0_fit, Bx_fit, "--", lw=1.6, color="b", label=f"fit Bx = {C:.2e} * a0^{p:.2f}"
@@ -126,7 +142,9 @@ plt.errorbar(
     linewidth=1.5,
     markersize=8,
     color="green",
-    label="new: w/o RR",
+    label="w/o RR",
+    markerfacecolor="none",
+    
 )
 # Bx2_fit = C2 * a1_fit**p2
 # plt.plot(a1_fit, Bx2_fit, "-.", lw=1.6, color="g", label="fitting new < 300 fs")
@@ -138,19 +156,60 @@ plt.errorbar(
     fmt="*",
     capsize=6,
     linewidth=1.5,
-    markersize=8,
+    markersize=12,
     color="red",
-    label="new: w. RR=LL",
+    label="w. RR=LL",
+    markerfacecolor="none",
 )
 # plt.plot(
 #     a0_fit, Bx3_fit, "-.", lw=1.6, color="r", label=f"fit Bx = {C3:.2e} * a0^{p3:.2f}"
 # )
 
+plt.errorbar(
+    a4,
+    Bx4,
+    yerr=yerr4,
+    fmt="s",
+    capsize=6,
+    linewidth=1.5,
+    markersize=8,
+    color="purple",
+    label="new: w. RR=LL, ne=120",
+    markerfacecolor="none",
+)
+
+# plt.errorbar(
+#     a5,
+#     Bx5,
+#     yerr=yerr5,
+#     fmt="s",
+#     # linestyle='--',
+#     capsize=6,
+#     linewidth=1.5,
+#     markersize=8,
+#     color="purple",
+#     label="new: w. RR=LL, ppc=1",
+#     markerfacecolor="none",
+# )
+
+plt.errorbar(
+    a6,
+    Bx6,
+    yerr=yerr6,
+    fmt="s",
+    # linestyle='--',
+    capsize=6,
+    linewidth=1.5,
+    markersize=8,
+    color="cyan",
+    label="new: w. RR=LL, ne=60",
+    markerfacecolor="none",
+)
 
 # Axes style to match the original figure
 plt.xlabel(r"$a_0$", fontsize=16)
 plt.ylabel(r"$B_x$ [GGauss]", fontsize=16)
-plt.xlim(200, 550)
+plt.xlim(150, 750)
 plt.ylim(0.0, 4.0)
 
 # handles, labels = plt.gca().get_legend_handles_labels()
@@ -160,7 +219,7 @@ plt.ylim(0.0, 4.0)
 # plt.legend(
 #     [handles[i] for i in order], [labels[i] for i in order], fontsize=14, frameon=True
 # )
-plt.legend()
+plt.legend(fontsize=12, frameon=True)
 # plt.title(f"Fitted power law: Bx = {C:.3e} * a0^{p:.2f}")
 # plt.title("at an early time=216 fs")
 plt.tight_layout()
