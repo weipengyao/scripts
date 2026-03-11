@@ -103,20 +103,20 @@ K_Bol = 1.38e-16  # Boltsmann constant in CGS units
 # V = 0.8e+08; B = 10; T_e = 2.3e5/1.16e4; T_i = 2.3e5/1.16e4; n_e = 1e10; space_scale = 2e11; A = 1.28; Z = 1
 # CME at 100 G
 # V = 2.5e+08; B = 100; T_e = 2.3e6/1.16e4; T_i = 2.3e6/1.16e4; n_e = 1e11; space_scale = 2e11; A = 1.28; Z = 1
-# V = 4.6e+08; B = 100; T_e = 3.5e6/1.16e4; T_i = 3.5e6/1.16e4; n_e = 1e11; space_scale = 2e11; A = 1.28; Z = 1
+V = 4.6e+08; B = 100; T_e = 3.5e6/1.16e4; T_i = 3.5e6/1.16e4; n_e = 1e11; space_scale = 2e11; A = 1.28; Z = 1
 
 # CME at 1 G
 # V = 0.24e+08; B = 1; T_e = 2.3e4/1.16e4; T_i = 2.3e4/1.16e4; n_e = 1e9; space_scale = 2e11; A = 1.28; Z = 1
 
 # CME in lab with B = 3e5 G
-V = 0.6e08
-B = 3e5
-T_e = 5.0e5 / 1.16e4
-T_i = 5.0e5 / 1.16e4
-n_e = 7.5e18
-space_scale = 1.0
-A = 17.3
-Z = 5.9
+# V = 0.6e08
+# B = 3e5
+# T_e = 5.0e5 / 1.16e4
+# T_i = 5.0e5 / 1.16e4
+# n_e = 7.5e18
+# space_scale = 1.0
+# A = 17.3
+# Z = 5.9
 
 
 # LULI2000 - Jan. 2025 - Turbulence
@@ -313,9 +313,13 @@ print("Hall parameter for eon He = {:.2f}".format(mfp_e / gyro_e))
 ### ions gyroradius and gyrofrequency
 gyro_freq_i = (Z * e_charge_cgs * B) / m_i / c_cgs / (2.0 * np.pi)  # [s^-1]
 gyro_i = m_i * c_cgs / (Z * e_charge_cgs * B) * max(vth_i, V)  # [cm]
+gyro_i_vth = m_i * c_cgs / (Z * e_charge_cgs * B) * vth_i  # [cm]
+gyro_i_V = m_i * c_cgs / (Z * e_charge_cgs * B) * V  # [cm]
 
 print("gyro_freq_i               = {:.1e}".format(gyro_freq_i))
 print("Ion Larmor radius         = {:.2e}".format(gyro_i * 1e4), "[um]")
+print("Ion Larmor radius (vth)   = {:.2e}".format(gyro_i_vth * 1e4), "[um]")
+print("Ion Larmor radius (V)     = {:.2e}".format(gyro_i_V * 1e4), "[um]")
 print("Ion Larmor period         = {:.1e}".format(1e9 / gyro_freq_i), "[ns]")
 # gyrofreq_i = vth_i/gyro_i/(2.*np.pi) # [s-1]
 # print ('Ion gyrofrequency         = {:.2e}'.format(gyrofreq_i), '[s-1]')
@@ -324,13 +328,14 @@ print("Ion Larmor period         = {:.1e}".format(1e9 / gyro_freq_i), "[ns]")
 omega_tau_i = e_charge_cgs * Z * B * tau_i / m_i / c_cgs
 # print ('Ion magnetization         = {:.2f}'.format(omega_tau_i))
 print("Hall parameter for ion Hi = {:.8f}".format(mfp_i / gyro_i))
-# print ('Ion Larmor radius / L_sys = {:.2e}'.format(gyro_i / space_scale))
+print ('r_Li (Vth) / L_sys        = {:.2e}'.format(gyro_i_vth / space_scale))
+print ('r_Li (V)   / L_sys        = {:.2e}'.format(gyro_i_V / space_scale))
 
 # print ('')
 
 ### ion inertial length
 di = 2.28e7 * Z ** (-1) * (A / n_i) ** (0.5)  # [cm]
-# print ('Ion inertial length di    = {:.2e}'.format(di),     '[cm]')
+print ('Ion inertial length di    = {:.2e}'.format(di*1e4),     '[um]')
 
 ### electron inertial length
 de = 5.31e5 * (1 / n_e) ** (0.5)  # [cm]
