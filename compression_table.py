@@ -87,6 +87,8 @@ K_Bol = 1.38e-16  # Boltsmann constant in CGS units
 # updated numbers
 # V = 0.5*6.8e+06; B = 300.e4; T_e = 17.; T_i = 17.; n_e = 1.3e21; space_scale = 0.03; A = 64.0; Z = 9.0
 
+## elongated MR
+V = 30*1.e+05; B = 10.e4; T_e = 100.; T_i = 100.; n_e = 1.0e19; space_scale = 0.1; A = 64.0; Z = 19.0
 
 # B table for astro Williams cs
 # V = 2.5e6; B = 20e-6; T_e = 0.8e3; T_i = 0.8e3; n_e = 7.0; space_scale = 4.6e19; A = 1; Z = 1
@@ -103,7 +105,7 @@ K_Bol = 1.38e-16  # Boltsmann constant in CGS units
 # V = 0.8e+08; B = 10; T_e = 2.3e5/1.16e4; T_i = 2.3e5/1.16e4; n_e = 1e10; space_scale = 2e11; A = 1.28; Z = 1
 # CME at 100 G
 # V = 2.5e+08; B = 100; T_e = 2.3e6/1.16e4; T_i = 2.3e6/1.16e4; n_e = 1e11; space_scale = 2e11; A = 1.28; Z = 1
-V = 4.6e+08; B = 100; T_e = 3.5e6/1.16e4; T_i = 3.5e6/1.16e4; n_e = 1e11; space_scale = 2e11; A = 1.28; Z = 1
+# V = 4.6e+08; B = 100; T_e = 3.5e6/1.16e4; T_i = 3.5e6/1.16e4; n_e = 1e11; space_scale = 2e11; A = 1.28; Z = 1
 
 # CME at 1 G
 # V = 0.24e+08; B = 1; T_e = 2.3e4/1.16e4; T_i = 2.3e4/1.16e4; n_e = 1e9; space_scale = 2e11; A = 1.28; Z = 1
