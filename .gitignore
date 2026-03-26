@@ -1,5 +1,36 @@
-.DS_Store
-.ipynb_checkpoints/*
+# Figures and plots
 *.png
+*.jpg
+*.jpeg
+*.svg
+*.eps
+*.tiff
+*.tif
 
+# Documents and PDFs
 *.pdf
+
+# Movies and animations
+*.mp4
+*.avi
+*.mov
+*.gif
+*.mpeg
+*.mpg
+*.mkv
+
+# HDF5 and large data files
+*.h5
+*.hdf5
+*.nc
+*.npy
+*.npz
+
+# Compressed archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# OS clutter
+.DS_Store
