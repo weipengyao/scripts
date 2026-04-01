@@ -30,7 +30,7 @@ No build system. Run Python scripts directly (`python script.py`) and notebooks 
 
 | Directory | Simulation/Data | Tools |
 |-----------|----------------|-------|
-| `IFE/` | Smilei PIC — B-field FFT, scaling laws, radiation reaction | `happi` |
+| `IFE/` | Inverse Faraday Effect — Smilei PIC — B-field FFT, scaling laws, radiation reaction | `happi` |
 | `amrvac/` | AMRVAC MHD — FFT, particle tracking | `yt` |
 | `Calculations/` | Shock physics: velocities, Coulomb log, thermal scale lengths | standalone |
 | `Spectrum_RCF/` | RCF dosimetry (MATLAB `.m` scripts) | MATLAB |

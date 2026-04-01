@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Python-based post-processing toolkit for **Inertial Fusion Energy (IFE)** laser-plasma physics simulations. Analyzes outputs from [Smilei](https://smileipic.github.io/Smilei/) (PIC code), focusing on electromagnetic field analysis, scaling laws, and publication-quality figures.
+Python-based post-processing toolkit for **Inverse Faraday Effect (IFE)** laser-plasma physics simulations. Analyzes outputs from [Smilei](https://smileipic.github.io/Smilei/) (PIC code), focusing on electromagnetic field analysis, scaling laws, and publication-quality figures.
 
 ## Running Scripts
 
@@ -44,15 +44,30 @@ Notebooks are run interactively via Jupyter.
 | `ife_bx_fft.py` | Full Bx-field pipeline: `get_fft()` → `apply_mask_and_ifft()` → `plot_comparison()` → `post_process_Bx_field()` |
 | `time_evo.py` | Time evolution of B-field strength across radiation reaction (RR) models and a0 values |
 | `ife_plot_scaling.py` | Power-law fits (Bx = C × a0^p) comparing simulations with different RR models, resolutions, ppc, and ne |
+| `make_schematic.py` | Schematic of co-moving frame field decomposition (E field into centripetal/tangential components) |
+| `plot_eta_rad.py` | η_rad vs a₀ analytical curves (exact, approximate, low-field asymptote) for radiative orbit |
+
+**Key notebooks:**
+
+| File | Role |
+|------|------|
+| `analytic.ipynb` | Analytic B-field scaling: polylogarithm f(b), plots μa₀⁴f(μ²a₀⁶) |
+| `ife_am.ipynb` | Angular momentum and energy budget (kinetic, EM, radiation) across a0 values |
+| `ife_trans.ipynb` | Laser transmission / density front tracking: ne, Ex, Ey fields, front position and velocity vs a0 |
+| `post_bx_fft.ipynb` | Interactive Bx FFT post-processing |
+| `post_thick.ipynb` | Post-processing for thick target simulations |
+| `post_thin.ipynb` | Post-processing for thin target simulations |
+| `post_ife_ne120_time_evo_scaling_a0.ipynb` | Time evolution and a0 scaling for ne=120 |
+| `post_ife_ne60_time_evo_scaling_a0.ipynb` | Time evolution and a0 scaling for ne=60 |
+| `post_ife_20260226_ne120_res80.ipynb` etc. | Per-run interactive analyses (large, ~3–4 MB with embedded output) |
+| `test_AM_normalization.ipynb` | Testing and validating angular momentum normalization |
 
 **Simulation parameter conventions in filenames/code:**
-- `a0`: normalized laser vector potential (intensity proxy), values ~250–500
+- `a0`: normalized laser vector potential (intensity proxy), values ~300–900
 - `ne`: electron density in units of nc (critical density), e.g., `ne60`, `ne120`
 - `res`: spatial resolution (cells per wavelength), e.g., `res40`, `res80`
 - `ppc`: particles per cell, e.g., `ppc1`, `ppc4`, `ppc16`
 - RR models: `LL` (Landau-Lifshitz), `cLL` (classical LL), `no` (no radiation reaction)
-
-**Notebooks** (`post_ife_*.ipynb`) contain full interactive analyses per simulation run. They are large (3–4 MB) due to embedded output.
 
 ## Key Notes
 
